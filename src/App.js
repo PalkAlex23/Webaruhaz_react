@@ -1,5 +1,8 @@
-import Termekek from './components/Termekek';
-import Kosar from './components/Kosar';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Public from "./pages/Public";
+import Admin from "./pages/Admin";
+import Layout from "./pages/Layout";
+import NoPage from "./pages/NoPage";
 
 function App() {
   return (
@@ -7,18 +10,16 @@ function App() {
       <header className="App-header">
         <h1>Fakestore webáruház</h1>
       </header>
-      <main className='row'>
-        <aside className='col-lg-3'>
-          <h3>Kosár</h3>
-          <Kosar />
-        </aside>
-        <article className="col-lg-9 row g-4">
-          <h3>Termékek</h3>{" "}
-          <Termekek />
-        </article>
-      </main>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Public />} />
+            <Route path="admin" element={<Admin />} />
+            <Route path="*" element={<NoPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
-    
   );
 }
 
